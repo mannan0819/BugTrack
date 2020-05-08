@@ -1,0 +1,24 @@
+﻿@model IEnumerable<BugTracker.Models.TicketGroup>
+
+@{
+    ViewData["Title"] = "Groups";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Ticket Groups</h1>
+
+<p>
+    <a asp-action="CreateTickets">Create New Group</a>
+</p>
+<table class="table align-content-center text-center">
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <a asp-action="ticket" class="btn btn-outline-info w-100 p-2 mb-1" asp-route-id=@item.Id>@item.name</a>
+                
+            </tr>
+        }
+    </tbody>
+</table>

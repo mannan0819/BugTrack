@@ -1,0 +1,49 @@
+﻿@using BugTracker.Models;
+@model Ticket;
+@{
+    ViewData["Title"] = "Details";
+}
+@if (Model != null)
+{
+    <h1>Details</h1>
+    <table>
+        <tr>
+            <td>TicketID: </td>
+            <td>@Model.Id</td>
+        </tr>
+        <tr>
+            <td>Title: </td>
+            <td>@Model.Title</td>
+        </tr>
+        <tr>
+            <td>Author: </td>
+            <td>@Model.Author</td>
+        </tr>
+        <tr>
+            <td>Slug:</td>
+            <td>@Model.Slug</td>
+        </tr>
+        <tr>
+            <td>DateCreated: </td>
+            <td>@Model.DateCreated</td>
+        </tr>
+        <tr>
+            <td>DateEdited: </td>
+            <td>@Model.DateEdited</td>
+        </tr>
+        <tr>
+            <td>Status: </td>
+            <td>@Model.Status</td>
+        </tr>
+        <tr>
+            <td>Description: </td>
+            <td>@Model.Description</td>
+        </tr>
+
+    </table>
+}
+else
+{
+    <h1>NO Ticket Was Found</h1>
+}
+

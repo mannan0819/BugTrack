@@ -1,0 +1,42 @@
+﻿@model List<BugTracker.Models.UserRoleViewModel>
+
+@{
+    ViewData["Title"] = "AssignRoles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Role Assignment for @ViewBag.rolename</h1>
+
+
+<table>
+    <form asp-action="AssignRoles">
+
+
+        @for (int i = 0; i < Model.Count; i++)
+        {
+        <tr>
+            <td>
+                <input type="hidden" asp-for=@Model[i].Username />
+                <input type="hidden" asp-for=@Model[i].Role />
+
+                <input class="form-check-input" asp-for=@Model[i].isSelected />
+
+                <label asp-for=@Model[i].isSelected class="form-check-label">@Model[i].Username</label>
+            </td>
+        </tr>
+
+
+        }
+
+        <div class="form-group">
+            @Html.AntiForgeryToken()
+            <input type="submit" value="Save" class="btn btn-dark" />
+        </div>
+    </form>
+</table>
+
+<div>
+    <a asp-action="ViewRoles">Back to Roles</a>
+</div>
+
+

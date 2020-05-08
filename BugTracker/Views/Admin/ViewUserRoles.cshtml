@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewData["Title"] = "User Roles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>User</h1>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>UserName</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@ViewBag.usr.UserName</td>
+                <td>@ViewBag.usr.Email</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr><th>Avaliable Roles</th></tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.allroles)
+            {
+                <tr><td>@item</td></tr>
+            }
+            <tr><th>Assigned Roles</th></tr>
+            @foreach (var item in ViewBag.roles)
+            {
+                <tr><td>@item</td></tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

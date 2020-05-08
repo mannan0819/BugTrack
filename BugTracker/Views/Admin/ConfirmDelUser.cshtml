@@ -1,0 +1,48 @@
+﻿@model Microsoft.AspNetCore.Identity.IdentityUser
+
+@{
+    ViewData["Title"] = "DeleteUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Delete User</h1>
+
+<form asp-action="DeleteUser" >
+    <div>
+
+        <div class="alert alert-warning" role="alert">
+            <p>
+                <strong>Deleting this data will permanently remove your account, and this cannot be recovered.</strong>
+            </p>
+        </div>
+        <input type="hidden" asp-for=@Model.Id />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.UserName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.UserName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+        </dl>
+    </div>
+
+    <div>
+        <div class="alert alert-danger" role="alert">
+            <p><strong>Do you want to permanently delete this user?</strong></p>
+
+            <div class="pl-1">
+                <input type="submit" class="btn btn-outline-danger" value="Delete user" />
+                <a asp-action="ViewUsers" class="btn btn-outline-primary">No, back to Users</a>
+            </div>
+        </div>
+    </div>
+</form>
+<div>
+    <a asp-action="ViewUsers">Back to Users</a>
+</div>
