@@ -23,6 +23,7 @@ namespace BugTracker
             Configuration = configuration;
 
             //Database.SetInitializer<ApplicationDbContext>(null);
+            
         }
 
         public IConfiguration Configuration { get; }
@@ -33,6 +34,9 @@ namespace BugTracker
             services.AddDbContext<ApplicationDbContext>(options =>    
                  options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+            var contexts = services.BuildServiceProvider().GetService<ApplicationDbContext>();
+            contexts.Database.Migrate();
+            
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()

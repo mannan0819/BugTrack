@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace BugTracker.Data.Migrations
+namespace BugTracker.Migrations
 {
-    public partial class ini : Migration
+    public partial class tablenew : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

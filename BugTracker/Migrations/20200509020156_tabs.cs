@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace BugTracker.Data.Migrations
+namespace BugTracker.Migrations
 {
-    public partial class addmigrationtickes : Migration
+    public partial class tabs : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

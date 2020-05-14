@@ -9,7 +9,7 @@ namespace BugTracker.Models
 {
     public class Ticket
     {
-        public int Id { get; set; }
+        public int TicketId { get; set; }
         [Required]
         public string Title { get; set; }
         [Required]
@@ -23,22 +23,7 @@ namespace BugTracker.Models
         public string Description { get; set; }
         public int GroupId { get; set; }
     }
-    public class TicketsGrp
-    {
-        public int Id { get; set; }
-        [Required]
-        public string Title { get; set; }
-        [Required]
-        public string Slug { get; set; }
-        [Required]
-        public string Author { get; set; }
-        public DateTime DateCreated { get; set; }
-        public DateTime DateEdited { get; set; }
-        [Required]
-        public short Status { get; set; }
-        public string Description { get; set; }
-        public int GroupId { get; set; }
-    }
+
 
     public class TicketGroup
     {

@@ -21,7 +21,7 @@ namespace BugTracker.Controllers
         }
         public IActionResult Index()
         {
-            List<TicketsGrp> tickets = ticketContext.Tickets.ToList();
+            List<Ticket> tickets = ticketContext.Tickets.ToList();
             return View(tickets);
         }
 
@@ -33,7 +33,7 @@ namespace BugTracker.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(TicketsGrp ticket)
+        public IActionResult Create(Ticket ticket)
         {
             if (ModelState.IsValid)
             {
@@ -48,13 +48,13 @@ namespace BugTracker.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            TicketsGrp tic = ticketContext.Tickets.Find(id);
+            Ticket tic = ticketContext.Tickets.Find(id);
             return View(tic);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(TicketsGrp ticket)
+        public IActionResult Edit(Ticket ticket)
         {
             if (ModelState.IsValid)
             {
@@ -68,12 +68,12 @@ namespace BugTracker.Controllers
 
         public IActionResult Detail(int id)
         {
-            TicketsGrp ticket;
+            Ticket ticket;
 
             if (ticketContext.Tickets.Any() &&
-                ticketContext.Tickets.Any(x => x.Id == id))
+                ticketContext.Tickets.Any(x => x.TicketId == id))
             {
-                ticket = ticketContext.Tickets.Single(x => x.Id == id);
+                ticket = ticketContext.Tickets.Single(x => x.TicketId == id);
             }
             else
             {
@@ -86,14 +86,14 @@ namespace BugTracker.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            TicketsGrp ticket = ticketContext.Tickets.Find(id);
+            Ticket ticket = ticketContext.Tickets.Find(id);
             return View(ticket);
         }
 
         [HttpPost, ActionName("Delete")]
         public IActionResult Delete_post(int id)
         {
-            TicketsGrp ticket = ticketContext.Tickets.Find(id);
+            Ticket ticket = ticketContext.Tickets.Find(id);
             ticketContext.Tickets.Remove(ticket);
             ticketContext.SaveChanges();
             return RedirectToAction("Index");

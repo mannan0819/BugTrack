@@ -1,4 +1,4 @@
-﻿@model BugTracker.Models.TicketsGrp
+﻿@model BugTracker.Models.Ticket
 
 @{
     ViewData["Title"] = "Edit";
@@ -13,9 +13,10 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label class="control-label">Group</label><br/>
+                <label class="control-label">Group</label><br />
                 <label class="form-check-label font-weight-bold ml-2">@ViewBag.GrpName</label>
             </div>
+
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control" />
@@ -51,6 +52,9 @@
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
+            <input asp-for="TicketId" type="hidden" />
+            <input asp-for="GroupId" type="hidden" />
+
             <div class="form-group">
                 @Html.AntiForgeryToken()
                 <input type="submit" value="Save" class="btn btn-primary" />
@@ -60,6 +64,6 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    @Html.ActionLink("Back to List", "Index", new { id = Model.GroupId })
 </div>
 

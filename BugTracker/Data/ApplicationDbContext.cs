@@ -11,26 +11,9 @@ namespace BugTracker.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
-        {
-           
-        }
-        
-        public ApplicationDbContext()
-        {
-            //Database.SetInitializer<TicketsGrp>(new CreateDatabaseIfNotExists<TicketsGrp>());
-            //Tickets.Database.CreateIfNotExists();
-            
-        }
-
-        // public ApplicationDbContext()
-        //{
-        //}
-        public DbSet<TicketsGrp> Tickets { set; get; }
-
-
-        // public ApplicationDbContext()
-        //{
-        //}
+        {}
+        public DbSet<Ticket> Tickets { set; get; }
         public DbSet<BugTracker.Models.TicketGroup> TicketGroup { get; set; }
+
     }
 }

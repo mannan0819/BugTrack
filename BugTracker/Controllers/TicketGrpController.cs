@@ -28,13 +28,13 @@ namespace BugTracker.Controllers
         public IActionResult CreateNew(int id)
         {
             ViewBag.GrpName = Context.TicketGroup.Find(id).name;
-            ViewBag.id = id;
+            ViewBag.GrId = id;
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateNew(TicketsGrp tick)
+        public IActionResult CreateNew(Ticket tick)
         {
             if (ModelState.IsValid)
             {
@@ -48,23 +48,49 @@ namespace BugTracker.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            TicketsGrp toEdit = Context.Tickets.Find(id);
+            Ticket toEdit = Context.Tickets.Find(id);
             ViewBag.GrpName = (Context.TicketGroup.Find(toEdit.GroupId)).name;
             return View(toEdit);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(TicketsGrp ticket)
+        public IActionResult Edit(Ticket ticket)
         {
             if (ModelState.IsValid)
             {
                 Context.Tickets.Update(ticket);
                 Context.SaveChanges();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = ticket.GroupId });
             }
+            ViewBag.GrpName = (Context.TicketGroup.Find(ticket.GroupId)).name;
             return View();
+            //return RedirectToAction("Edit", new { id = ticket.TicketId });
+        }
+
+        public IActionResult Detail (int id)
+        {
+            Ticket ticket = Context.Tickets.Find(id);
+            ViewBag.GrpName = Context.TicketGroup.Find(ticket.GroupId).name;
+            return View(ticket);
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            Ticket ticket = Context.Tickets.Find(id);
+            ViewBag.GrpName = Context.TicketGroup.Find(ticket.GroupId).name;
+            return View(ticket);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public IActionResult Delete_post(int id)
+        {
+            Ticket ticket = Context.Tickets.Find(id);
+            Context.Tickets.Remove(ticket);
+            Context.SaveChanges();
+            return RedirectToAction("Index", new { id = ticket.GroupId });
         }
     }
 }

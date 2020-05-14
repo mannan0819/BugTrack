@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BugTracker.Models.TicketsGrp>
+﻿@model IEnumerable<BugTracker.Models.Ticket>
 
 @{
     ViewData["Title"] = ViewBag.GrpName;
@@ -12,9 +12,6 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Title)
             </th>
@@ -44,9 +41,6 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
                 <td>
@@ -68,11 +62,12 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Detail", "Detail", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.TicketId }) |
+                    @Html.ActionLink("Detail", "Detail", new { id = item.TicketId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.TicketId })
                 </td>
             </tr>
         }
     </tbody>
 </table>
+<a asp-controller="Tickets" asp-action="Index">Back to Groups</a>
