@@ -59,9 +59,20 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Description)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FileName)
+        </dt>
+        <dd class="col-sm-10">
+            <a href=@ViewBag.FileNa>@Model.FileName</a>
 
+        </dd>
+        <dt>
+            @(Model.FileName)
+        </dt>
+        <img src=@(ViewBag.FileNa)>
     </dl>
 </div>
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model.TicketId">Edit</a> |
     @Html.ActionLink("Back to List", "Index", new { id = Model.GroupId })

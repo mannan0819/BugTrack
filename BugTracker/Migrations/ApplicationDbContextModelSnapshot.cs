@@ -21,7 +21,7 @@ namespace BugTracker.Migrations
 
             modelBuilder.Entity("BugTracker.Models.Ticket", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("TicketId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -39,6 +39,9 @@ namespace BugTracker.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("FileName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("GroupId")
                         .HasColumnType("int");
 
@@ -53,7 +56,7 @@ namespace BugTracker.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("TicketId");
 
                     b.ToTable("Tickets");
                 });

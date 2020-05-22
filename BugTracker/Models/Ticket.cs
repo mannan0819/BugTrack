@@ -4,6 +4,9 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.FileProviders;
 
 namespace BugTracker.Models
 {
@@ -22,8 +25,27 @@ namespace BugTracker.Models
         public short Status { get; set; }
         public string Description { get; set; }
         public int GroupId { get; set; }
+        public string FileName { get; set; }
+        
     }
 
+    public class TicketViewModel
+    {
+        public int TicketId { get; set; }
+        [Required]
+        public string Title { get; set; }
+        [Required]
+        public string Slug { get; set; }
+        [Required]
+        public string Author { get; set; }
+        public DateTime DateCreated { get; set; }
+        public DateTime DateEdited { get; set; }
+        [Required]
+        public short Status { get; set; }
+        public string Description { get; set; }
+        public int GroupId { get; set; }
+        public IFormFile upFile { get; set; }
+    }
 
     public class TicketGroup
     {
@@ -55,4 +77,10 @@ namespace BugTracker.Models
         public bool isSelected { get; set; }
 
     }
+
+    public class up
+    {
+        public IFormFile ff { set; get; }
+    }
+
 }

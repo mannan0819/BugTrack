@@ -5,6 +5,10 @@
     <UserSecretsId>aspnet-BugTracker-39521007-4920-4969-B3EF-B6633A3676A8</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="wwwroot\uploads\logo.jpg" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.1" />
@@ -12,13 +16,18 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
   </ItemGroup>
 
 
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
     <Folder Include="Views\Ticket\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="wwwroot\uploads\logo.jpg" />
   </ItemGroup>
 
 </Project>

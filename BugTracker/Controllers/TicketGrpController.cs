@@ -3,20 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using BugTracker.Data;
 using BugTracker.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
+using System.Web;
+using Microsoft.Extensions.Hosting;
 
 namespace BugTracker.Controllers
 {
     public class TicketGrpController : Controller
     {
         private ApplicationDbContext Context;
+        private IHostingEnvironment Env;
 
-        public TicketGrpController(ApplicationDbContext context)
+        public TicketGrpController(ApplicationDbContext context, 
+                                   IHostingEnvironment env)
         {
             Context = context;
+            Env = env;
         }
+
         public IActionResult Index(int id)
         {
             ViewBag.GrpName = Context.TicketGroup.Find(id).name;
@@ -34,11 +42,33 @@ namespace BugTracker.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateNew(Ticket tick)
+        public IActionResult CreateNew(TicketViewModel tick)
         {
             if (ModelState.IsValid)
             {
-                Context.Tickets.Add(tick);
+                Ticket ticket = new Ticket
+                {
+                    Title = tick.Title,   
+                    Slug = tick.Slug,
+                    Author = tick.Author, 
+                    DateCreated = tick.DateCreated, 
+                    DateEdited = tick.DateEdited, 
+                    Status = tick.Status,
+                    Description = tick.Description,
+                    GroupId = tick.GroupId
+                 };
+
+
+                if (tick.upFile != null)
+                {
+                    string filename = tick.upFile.FileName;
+                    string folderPath = Path.Combine(Env.ContentRootPath, "wwwroot", "uploads");
+                    string uniqFile = Guid.NewGuid().ToString() + "_" + filename;
+                    string filePath = Path.Combine(folderPath, uniqFile);
+                    tick.upFile.CopyTo(new FileStream(filePath, FileMode.Create));
+                    ticket.FileName = uniqFile;
+                }
+                Context.Tickets.Add(ticket);
                 Context.SaveChanges();
                 return RedirectToAction("Index", new { id = tick.GroupId });
             }
@@ -66,12 +96,24 @@ namespace BugTracker.Controllers
             }
             ViewBag.GrpName = (Context.TicketGroup.Find(ticket.GroupId)).name;
             return View();
-            //return RedirectToAction("Edit", new { id = ticket.TicketId });
+        }
+
+        public IActionResult img()
+        {
+            return View();
         }
 
         public IActionResult Detail (int id)
         {
             Ticket ticket = Context.Tickets.Find(id);
+            if (ticket.FileName != null)
+            {
+                string fileStr = ticket.FileName.ToString();
+                //fileStr = fileStr.Substring(fileStr.IndexOf("_") + 1);
+                ViewBag.FileNa = "/uploads"+ "/" + fileStr;
+                
+            }
+
             ViewBag.GrpName = Context.TicketGroup.Find(ticket.GroupId).name;
             return View(ticket);
         }
