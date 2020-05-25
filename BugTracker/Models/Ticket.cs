@@ -25,8 +25,9 @@ namespace BugTracker.Models
         public short Status { get; set; }
         public string Description { get; set; }
         public int GroupId { get; set; }
+        [DisplayName("Attachment")]
         public string FileName { get; set; }
-        
+        public bool isImg { get; set; }
     }
 
     public class TicketViewModel

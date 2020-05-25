@@ -57,7 +57,7 @@ namespace BugTracker.Controllers
                     Description = tick.Description,
                     GroupId = tick.GroupId
                  };
-
+                if (ticket.Description == null) ticket.Description = "";
 
                 if (tick.upFile != null)
                 {
@@ -67,6 +67,14 @@ namespace BugTracker.Controllers
                     string filePath = Path.Combine(folderPath, uniqFile);
                     tick.upFile.CopyTo(new FileStream(filePath, FileMode.Create));
                     ticket.FileName = uniqFile;
+
+
+                    //Checking if image file
+                    string Filetype = tick.upFile.ContentType;
+                    int index = Filetype.IndexOf("/");
+                    if (index != -1) Filetype = Filetype.Substring(0, index);
+                    ticket.isImg = Filetype.Equals("image");
+                  
                 }
                 Context.Tickets.Add(ticket);
                 Context.SaveChanges();
@@ -131,6 +139,12 @@ namespace BugTracker.Controllers
         {
             Ticket ticket = Context.Tickets.Find(id);
             Context.Tickets.Remove(ticket);
+            if (ticket.FileName != null)
+            {
+               // File.Delete();
+               // IFileProvider physicalFileProvider = new PhysicalFileProvider(@"D:\DeleteMyContentsPlease\");
+
+            }
             Context.SaveChanges();
             return RedirectToAction("Index", new { id = ticket.GroupId });
         }
